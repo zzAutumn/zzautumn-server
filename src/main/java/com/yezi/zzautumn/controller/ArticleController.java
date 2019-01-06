@@ -2,6 +2,7 @@ package com.yezi.zzautumn.controller;
 
 import com.yezi.zzautumn.domain.Article;
 import com.yezi.zzautumn.service.ArticleService;
+import com.yezi.zzautumn.utils.OperationResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -23,7 +24,7 @@ import java.util.List;
 @Api(value = "文章管理", description = "文章管理")
 @RestController
 @RequestMapping("/zzautumn/v1/article")
-public class ArticleController {
+public class ArticleController extends BaseController{
 
     @Autowired
     ArticleService articleService;
@@ -35,9 +36,11 @@ public class ArticleController {
             @ApiImplicitParam(name = "content", value = "文章内容", required = true, paramType = "query"),
             @ApiImplicitParam(name = "tags", value = "文章标签", required = true, paramType = "query", allowMultiple = true)
     })
-    public Object saveArticle(String title,String content,@RequestParam List<String> tags) {
-        Article article = articleService.saveOne(title, content, tags);
+    public OperationResult saveArticle(String title, String content, @RequestParam List<String> tags) {
 
-        return article;
+        return processSimple((r) -> {
+            Article article = articleService.saveOne(title, content, tags);
+            r.setData(article);
+        });
     }
 }
