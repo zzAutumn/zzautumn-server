@@ -14,8 +14,10 @@ public class OperationResult implements Serializable {
     private boolean result = false;
     private String code = "";
 
-    @JsonInclude
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.NON_NULL)
     private String msg;
+
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.NON_NULL)
     private Object data;
 
 }
