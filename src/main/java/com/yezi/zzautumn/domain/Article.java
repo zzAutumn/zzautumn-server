@@ -21,7 +21,7 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer articleId;
+    private Integer id;
 
     @Column
     private String title;

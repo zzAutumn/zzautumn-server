@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: yezi
@@ -27,6 +29,8 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);
+        String savedTags = tags.stream().collect(Collectors.joining(","));
+        article.setAssignTags(savedTags);
         return articleRepository.save(article);
     }
 }
