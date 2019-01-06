@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author: yezi
@@ -22,7 +23,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Override
-    public Article saveOne(String title, String content, Collection<String> tags) {
+    public Article saveOne(String title, String content, List<String> tags) {
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);

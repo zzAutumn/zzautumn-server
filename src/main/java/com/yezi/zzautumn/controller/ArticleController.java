@@ -24,7 +24,7 @@ public class ArticleController {
     ArticleService articleService;
 
     @RequestMapping(value = "/save-article", method = {RequestMethod.POST, RequestMethod.GET})
-    public Object saveArticle(@RequestParam String title,@RequestParam String content,@RequestParam List<String> tags) {
+    public Object saveArticle(String title,String content,@RequestParam List<String> tags) {
         Article article = articleService.saveOne(title, content, tags);
 
         return article;

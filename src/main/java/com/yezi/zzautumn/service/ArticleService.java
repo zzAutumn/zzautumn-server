@@ -3,6 +3,7 @@ package com.yezi.zzautumn.service;
 import com.yezi.zzautumn.domain.Article;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author: yezi
@@ -11,6 +12,6 @@ import java.util.Collection;
  */
 public interface ArticleService {
 
-    Article saveOne(String title, String content, Collection<String> tags);
+    Article saveOne(String title, String content, List<String> tags);
 
 }
