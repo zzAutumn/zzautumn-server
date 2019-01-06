@@ -5,6 +5,7 @@ import com.yezi.zzautumn.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -23,7 +24,7 @@ public class ArticleController {
     ArticleService articleService;
 
     @RequestMapping(value = "/save-article", method = {RequestMethod.POST, RequestMethod.GET})
-    public Object saveArticle(String title, String content, List<String> tags) {
+    public Object saveArticle(@RequestParam String title,@RequestParam String content,@RequestParam List<String> tags) {
         Article article = articleService.saveOne(title, content, tags);
 
         return article;
