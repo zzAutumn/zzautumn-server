@@ -33,8 +33,8 @@ public class UserController extends BaseController{
     })
     public OperationResult checkUser(String name, String password) {
         return processSimple((r) -> {
-            User user = userService.checkUser(name, password);
-            r.setData(user);
+            Object res = userService.checkUser(name, password);
+            r.setData(res);
         });
     }
 

@@ -8,7 +8,7 @@ import com.yezi.zzautumn.domain.User;
  * @Description:
  */
 public interface UserService {
-    User checkUser(String name, String password);
+    Object checkUser(String name, String password);
 
     User addUser(String name, String password);
 }
