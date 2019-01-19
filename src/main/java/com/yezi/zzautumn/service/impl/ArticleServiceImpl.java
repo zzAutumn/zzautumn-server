@@ -4,6 +4,7 @@ import com.yezi.zzautumn.domain.Article;
 import com.yezi.zzautumn.repository.ArticleRepository;
 import com.yezi.zzautumn.service.ArticleService;
 import com.yezi.zzautumn.vo.PageVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,7 +45,10 @@ public class ArticleServiceImpl implements ArticleService {
 
         Sort sort = new Sort(Sort.Direction.DESC, "updateDate");
         Pageable page = PageRequest.of(pageIndex - 1, pageSize, sort);
-        Page<Article> articles = articleRepository.findArticlesByTitleIsLike(title, page);
+        if (StringUtils.isBlank(title)){
+            title="";
+        }
+        Page<Article> articles = articleRepository.findArticlesByTitleIsLike("%"+title+"%", page);
         return PageVO.make(articles);
     }
 }
