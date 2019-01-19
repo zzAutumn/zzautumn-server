@@ -29,13 +29,29 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Override
-    public Article saveOne(String title, String content, List<String> tags) {
-        Article article = new Article();
-        article.setTitle(title);
-        article.setContent(content);
-        String savedTags = tags.stream().collect(Collectors.joining(","));
-        article.setAssignTags(savedTags);
-        return articleRepository.save(article);
+    public Article saveOne(String title, String content, List<String> tags, Integer id) {
+        Article returnValue = null;
+        if (null != id) {
+            Optional<Article> savedArticle = articleRepository.findById(id);
+            if (savedArticle.isPresent()) {
+                Article article = savedArticle.get();
+                article.setId(id);
+                article.setUpdateDate(new Date());
+                article.setTitle(title);
+                article.setContent(content);
+                String savedTags = tags.stream().collect(Collectors.joining(","));
+                article.setAssignTags(savedTags);
+                returnValue = articleRepository.save(article);
+            }
+        } else {
+            Article article = new Article();
+            article.setTitle(title);
+            article.setContent(content);
+            String savedTags = tags.stream().collect(Collectors.joining(","));
+            article.setAssignTags(savedTags);
+            returnValue = articleRepository.save(article);
+        }
+        return returnValue;
     }
 
     @Override

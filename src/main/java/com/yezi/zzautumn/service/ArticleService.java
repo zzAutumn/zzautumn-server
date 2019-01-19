@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    Article saveOne(String title, String content, List<String> tags);
+    Article saveOne(String title, String content, List<String> tags, Integer id);
 
     PageVO getArticleList(Integer pageIndex, Integer pageSize, String title);
 
