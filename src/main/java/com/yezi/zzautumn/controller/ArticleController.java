@@ -3,6 +3,7 @@ package com.yezi.zzautumn.controller;
 import com.yezi.zzautumn.domain.Article;
 import com.yezi.zzautumn.service.ArticleService;
 import com.yezi.zzautumn.utils.OperationResult;
+import com.yezi.zzautumn.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -41,6 +42,19 @@ public class ArticleController extends BaseController{
         return processSimple((r) -> {
             Article article = articleService.saveOne(title, content, tags);
             r.setData(article);
+        });
+    }
+
+    @RequestMapping(value = "/getArticleList", method = { RequestMethod.POST, RequestMethod.GET})
+    @ApiOperation(value = "获取文章列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "title", value = "文章标题", required = false)
+    })
+    public OperationResult getArticleList(String title, @RequestParam(defaultValue = "1") Integer pageIndex,
+                                          @RequestParam(defaultValue = "10") Integer pageSize) {
+        return processSimple((r) -> {
+            PageVO articleList = this.articleService.getArticleList(pageIndex, pageSize, title);
+            r.setData(articleList);
         });
     }
 }
