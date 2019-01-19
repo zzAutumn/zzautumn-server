@@ -42,7 +42,11 @@ public class PageVO {
     }
 
     public Integer getPageIndex() {
-        return pageIndex;
+        if (null != pageIndex) {
+            return pageIndex + 1;
+        } else {
+            return 1;
+        }
     }
 
     public void setPageIndex(Integer pageIndex) {
@@ -50,11 +54,7 @@ public class PageVO {
     }
 
     public Integer getPageSize() {
-        if (null != pageIndex) {
-            return pageIndex + 1;
-        } else {
-            return 1;
-        }
+        return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {

@@ -16,4 +16,8 @@ public interface ArticleService {
     Article saveOne(String title, String content, List<String> tags);
 
     PageVO getArticleList(Integer pageIndex, Integer pageSize, String title);
+
+    Boolean deleteOne(Integer id);
+
+    Article getOne(Integer id);
 }

@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,6 +56,26 @@ public class ArticleController extends BaseController{
         return processSimple((r) -> {
             PageVO articleList = this.articleService.getArticleList(pageIndex, pageSize, title);
             r.setData(articleList);
+        });
+    }
+
+    @RequestMapping(value = "/deleteById", method = { RequestMethod.POST })
+    @ApiOperation(value = "根据Id删除文章")
+    @ApiImplicitParam(name = "id", value = "文章id", required = true)
+    public OperationResult deleteById(Integer id) {
+        return processSimple(r -> {
+            Boolean result = articleService.deleteOne(id);
+            r.setData(result);
+        });
+    }
+
+    @RequestMapping(value = "/getById", method = { RequestMethod.POST })
+    @ApiOperation(value = "根据Id获取文章")
+    @ApiImplicitParam(name = "id", value = "文章id", required = true)
+    public OperationResult getById(Integer id) {
+        return processSimple(r -> {
+            Article article = articleService.getOne(id);
+            r.setData(article);
         });
     }
 }

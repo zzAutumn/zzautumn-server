@@ -13,9 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -48,7 +46,25 @@ public class ArticleServiceImpl implements ArticleService {
         if (StringUtils.isBlank(title)){
             title="";
         }
-        Page<Article> articles = articleRepository.findArticlesByTitleIsLike("%"+title+"%", page);
+        Page<Article> articles = articleRepository.findArticlesByTitleIsLikeAndDeletedIsFalse("%"+title+"%", page);
         return PageVO.make(articles);
+    }
+
+    @Override
+    public Boolean deleteOne(Integer id) {
+
+        Optional<Article> article = articleRepository.findById(id);
+        article.ifPresent(a -> {
+            a.setDeleted(true);
+            a.setUpdateDate(new Date());
+            articleRepository.saveAndFlush(a);
+        });
+        return true;
+    }
+
+    @Override
+    public Article getOne(Integer id) {
+        Optional<Article> article = articleRepository.findByIdAndDeletedIsFalse(id);
+        return article.orElse(null);
     }
 }

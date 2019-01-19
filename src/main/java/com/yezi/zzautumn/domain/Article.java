@@ -3,6 +3,7 @@ package com.yezi.zzautumn.domain;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,6 +29,10 @@ public class Article {
 
     @Column
     private String content;
+
+    @Column(name = "is_deleted")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private Boolean deleted = false;
 
     @Column(name = "create_date")
     private Date createDate = new Date();
