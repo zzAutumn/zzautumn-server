@@ -72,7 +72,7 @@ public class ArticleController extends BaseController{
         });
     }
 
-    @RequestMapping(value = "/getById", method = { RequestMethod.POST })
+    @RequestMapping(value = "/getById", method = { RequestMethod.POST, RequestMethod.GET })
     @ApiOperation(value = "根据Id获取文章")
     @ApiImplicitParam(name = "id", value = "文章id", required = true)
     public OperationResult getById(Integer id) {

@@ -9,7 +9,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * @Author: yezi
  * @Date: 2019/3/17 17 48
- * @Description:
+ * @Description: 这个方法没用呀， 我还是在nginx里设置了跨域才好使
  */
 @Configuration
 public class GlobalCorsConfig {
