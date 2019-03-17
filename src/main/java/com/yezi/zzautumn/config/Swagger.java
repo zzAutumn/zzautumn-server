@@ -35,7 +35,7 @@ public class Swagger {
     private ApiInfo apiInfo() {
 
         return new ApiInfoBuilder().title("zzautumn server").description("The server side API for zzautum")
-                .termsOfServiceUrl("*").version("1.0").contact(new Contact("zzautumn", "", "")).build();
+                .termsOfServiceUrl("*").version("1.0").contact(new Contact("zzautumn", "http://zzautumn.xrw84.cn", "")).build();
     }
 
 }
