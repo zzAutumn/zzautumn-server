@@ -29,7 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Override
-    public Article saveOne(String title, String content, List<String> tags, Integer id) {
+    public Article saveOne(String title, String content, String imgBanner,String intro, List<String> tags, Integer id) {
         Article returnValue = null;
         if (null != id) {
             Optional<Article> savedArticle = articleRepository.findById(id);
@@ -38,6 +38,8 @@ public class ArticleServiceImpl implements ArticleService {
                 article.setId(id);
                 article.setUpdateDate(new Date());
                 article.setTitle(title);
+                article.setImgBanner(imgBanner);
+                article.setIntro(intro);
                 article.setContent(content);
                 String savedTags = tags.stream().collect(Collectors.joining(","));
                 article.setAssignTags(savedTags);
@@ -47,6 +49,8 @@ public class ArticleServiceImpl implements ArticleService {
             Article article = new Article();
             article.setTitle(title);
             article.setContent(content);
+            article.setImgBanner(imgBanner);
+            article.setIntro(intro);
             String savedTags = tags.stream().collect(Collectors.joining(","));
             article.setAssignTags(savedTags);
             returnValue = articleRepository.save(article);

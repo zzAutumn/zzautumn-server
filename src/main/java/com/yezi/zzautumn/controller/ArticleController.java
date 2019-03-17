@@ -36,13 +36,15 @@ public class ArticleController extends BaseController{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "title", value = "文章标题", required = true, paramType = "query"),
             @ApiImplicitParam(name = "id", value = "文章ID", required = false, paramType = "query"),
+            @ApiImplicitParam(name = "imgBannber", value = "文章大图", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "intro", value = "文章简介", required = true, paramType = "query"),
             @ApiImplicitParam(name = "content", value = "文章内容", required = true, paramType = "query"),
             @ApiImplicitParam(name = "tags", value = "文章标签", required = true, paramType = "query", allowMultiple = true)
     })
-    public OperationResult saveArticle(String title, String content, @RequestParam List<String> tags, Integer id) {
+    public OperationResult saveArticle(String title, String content, String imgBanner, String intro,@RequestParam List<String> tags, Integer id) {
 
         return processSimple((r) -> {
-            Article article = articleService.saveOne(title, content, tags, id);
+            Article article = articleService.saveOne(title, content, imgBanner, intro, tags, id);
             r.setData(article);
         });
     }
@@ -53,7 +55,7 @@ public class ArticleController extends BaseController{
             @ApiImplicitParam(name = "title", value = "文章标题", required = false)
     })
     public OperationResult getArticleList(String title, @RequestParam(defaultValue = "1") Integer pageIndex,
-                                          @RequestParam(defaultValue = "10") Integer pageSize) {
+                                          @RequestParam(defaultValue = "20") Integer pageSize) {
         return processSimple((r) -> {
             PageVO articleList = this.articleService.getArticleList(pageIndex, pageSize, title);
             r.setData(articleList);

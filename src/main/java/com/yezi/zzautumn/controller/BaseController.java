@@ -3,6 +3,7 @@ package com.yezi.zzautumn.controller;
 import com.yezi.zzautumn.utils.OperationResult;
 import org.springframework.validation.ObjectError;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 /**
@@ -42,6 +43,6 @@ public abstract class BaseController {
 
     @FunctionalInterface
     public interface Taker {
-        void process(OperationResult rr);
+        void process(OperationResult rr) throws IOException;
     }
 }

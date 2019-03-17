@@ -30,6 +30,12 @@ public class Article {
     @Column
     private String content;
 
+    @Column
+    private String imgBanner;
+
+    @Column
+    private String intro;
+
     @Column(name = "is_deleted")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean deleted = false;
