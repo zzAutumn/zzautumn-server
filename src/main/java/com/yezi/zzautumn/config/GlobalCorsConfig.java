@@ -26,7 +26,6 @@ public class GlobalCorsConfig {
         configuration.addAllowedMethod("*");
         // 放行哪些原始域头部信息
         configuration.addAllowedHeader("*");
-        configuration.addExposedHeader("*");
 
         // 2.添加映射路由
         UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
